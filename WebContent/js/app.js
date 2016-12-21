@@ -12,13 +12,21 @@ function checkAuthStatus() {
 	// Authentication Listener
 	firebase.auth().onAuthStateChanged(firebaseUser => {
 		if (!firebaseUser) {
-			window.location = "login.html";
+			//window.location = "login.html";
 		}
 	});
 	
 	firebase.auth().onAuthStateChanged(firebaseUser => {
 		if (!firebaseUser) {
-			window.location = "login.html";
+			//window.location = "login.html";
 		}
 	});
-}
+};
+
+function loginDropDown(){
+    //Handles menu drop down
+	var loginDropDown = document.getElementById('loginDropDown');
+	loginDropDown.addEventListener('click', e => {
+        e.stopPropagation();
+    });
+};
