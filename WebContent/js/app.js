@@ -21,6 +21,8 @@
 	var btnFacebook = document.getElementById("btnFacebook");
 	var btnGoogle = document.getElementById("btnGoogle");
 	var signUpError = document.getElementById("signUpError");
+	var nameDropDown = document.getElementById("nameDropDown");
+	var displayName = document.getElementById("displayName");
 	
 	// Add Login Event
 	btnLogin.addEventListener('click', e => {
@@ -30,6 +32,8 @@
 		// Sign in
 		var promise = auth.signInWithEmailAndPassword(email,password);
 		promise.catch(e => console.log(e.message));
+		//close Modal window
+		$("#login-modal").modal("hide");
 	});
 	
 	// Add Signup Event
@@ -37,14 +41,25 @@
 		var email = signupEmail.value;
 		var signupPassword1 = document.getElementById("signupPassword1").value;
 		var signupPassword2 = document.getElementById("signupPassword2").value;
+		var signupName = document.getElementById("signupName");
 		if(signupPassword1 == signupPassword2) {
 			var auth = firebase.auth();
 			// Sign in
-			var promise = auth.createUserWithEmailAndPassword(email,signupPassword1);
+			var promise = auth.createUserWithEmailAndPassword(email,signupPassword1)
+				.then(function() {
+					//update Display Name
+					var user = firebase.auth().currentUser;
+					user.updateProfile({
+					  displayName: signupName.value,
+					});
+					displayName.innerHTML = signupName.value + "<span class='caret'></span></a>";
+					user.sendEmailVerification();
+				});
 			promise.catch(e => {
 				console.log(e.message);
 				signUpError.innerHTML = e.message;
 			});
+			//close Modal window
 			$("#signup-modal").modal("hide");
 		}
 		//Passwords Don't Match
@@ -57,16 +72,21 @@
 	firebase.auth().onAuthStateChanged(firebaseUser => {
 		if (firebaseUser) {
 			console.log(firebaseUser);
+			if (firebase.auth().currentUser.displayName != null) {
+				displayName.innerHTML = firebase.auth().currentUser.displayName + "<span class='caret'></span></a>";
+			}
 			// When logged in, give options to log out and show user
 			btnLogout.classList.remove('hide');
+			nameDropDown.classList.remove('hide');
 			// And hide the login/signup options
 			navLogin.classList.add('hide');
 			navSignUp.classList.add('hide');
 		}
 		else {
+			console.log("No user logged in.");
 			// When not logged in, hide logout options
-			console.log("not logged in");
 			btnLogout.classList.add('hide');
+			nameDropDown.classList.add('hide');
 			// And give login/signup options
 			navLogin.classList.remove('hide');
 			navSignUp.classList.remove('hide');

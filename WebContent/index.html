@@ -38,8 +38,13 @@
 					<li id="navLogin"><a href="#" data-toggle="modal"
 						data-target="#login-modal"><span
 							class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					<li id="btnLogout" class="hide"><a href="#"><span
+					<li id= "nameDropDown" class="dropdown"><a id="displayName" class="dropdown-toggle"
+						data-toggle="dropdown" href="#"> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li id="btnLogout"><a href="#"><span
 							class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+						</ul> <!--dropdown-menu close-->
+					</li>
 				</ul>
 				<!--navbar-right close-->
 			</div>
@@ -73,7 +78,7 @@
 				</div>
 				<form>
 					<input id="inputUsernameEmail" type="text" name="user"
-						placeholder="Username"> <input id="inputPassword"
+						placeholder="Email"> <input id="inputPassword"
 						type="password" name="pass" placeholder="Password"> <input
 						id="btnLogin" type="submit" name="login"
 						class="login loginmodal-submit" value="Login">
@@ -95,8 +100,8 @@
 				<br>
 				<form>
 					<fieldset>
-						<input id="signupEmail" type="text" name="email"
-							placeholder="Email"> 
+						<input id="signupName" type="text" placeholder="Name"> 
+						<input id="signupEmail" type="text" placeholder="Email"> 
 						<input id="signupPassword1"	type="password" placeholder="Enter Password">
 						<input id="signupPassword2" type="password"	placeholder="Confirm Password">
 					</fieldset>
