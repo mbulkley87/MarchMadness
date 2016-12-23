@@ -9,6 +9,7 @@
 <script src="js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 <script>
 	$(function() {
