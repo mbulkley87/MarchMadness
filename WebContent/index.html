@@ -13,17 +13,17 @@
 	$(function() {
 		$("#navBarImport").load("navBar.html");
 	});
-	function addScript(filename)
-	{;
-		 var scriptBlock=document.createElement('script');
-		 scriptBlock.setAttribute("type","text/javascript");
-		 scriptBlock.setAttribute("src", filename);
-		 document.getElementsByTagName("head")[0].appendChild(scriptBlock);
+	function addScript(filename) {
+		;
+		var scriptBlock = document.createElement('script');
+		scriptBlock.setAttribute("type", "text/javascript");
+		scriptBlock.setAttribute("src", filename);
+		document.getElementsByTagName("head")[0].appendChild(scriptBlock);
 	};
 </script>
 </head>
 <body onload="addScript('js/login.js')">
-	
+
 	<div id="navBarImport"></div>
 
 	<div class="container">
@@ -34,6 +34,6 @@
 		<p>Matt is really cool</p>
 		<p>Way better than Corry!</p>
 	</div>
-	
+
 </body>
 </html>
