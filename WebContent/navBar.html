@@ -1,0 +1,102 @@
+<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="menu"><i class="fa fa-bars" id="menu_icon"></i></a> <a
+					class="navbar-brand" href="index.html"> Bulkley Pool </a>
+			</div>
+			<!--navbar-header close-->
+			<div class="collapse navbar-collapse drop_menu" id="content_details">
+				<ul class="nav navbar-nav">
+					<li><a href="standings.jsp"> Standings</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#"> Picks <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="makePicks.jsp">Make Picks</a></li>
+							<li><a href="seePicks.jsp">See Picks</a></li>
+							<li><a href="myPicks.jsp">My Picks</a></li>
+						</ul> <!--dropdown-menu close--></li>
+				</ul>
+				<!--nav navbar-nav close-->
+				<ul class="nav navbar-nav navbar-right">
+					<li id="navSignUp"><a href="#" data-toggle="modal"
+						data-target="#signup-modal"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li id="navLogin"><a href="#" data-toggle="modal"
+						data-target="#login-modal"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li id= "nameDropDown" class="dropdown"><a id="displayName" class="dropdown-toggle"
+						data-toggle="dropdown" href="#"> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li id="btnLogout"><a href="#"><span
+							class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+						</ul> <!--dropdown-menu close-->
+					</li>
+				</ul>
+				<!--navbar-right close-->
+			</div>
+			<!--collapse navbar-collapse drop_menu close-->
+		</div>
+		<!--container-fluid close-->
+	</nav>
+	<!--navbar navbar-inverse close-->
+	<br>
+	<br>
+	<br>
+
+	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="log-section">
+				<h1>Log In</h1>
+				<div id="socialMediaLogins">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<a href="#" id="btnFacebook"
+								class="btn btn-lg btn-primary btn-block" style="color: white">Facebook</a>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<a href="#" id="btnGoogle" class="btn btn-lg btn-info btn-block"
+								style="color: white">Google</a>
+						</div>
+					</div>
+					<br>
+				</div>
+				<form>
+					<input id="inputUsernameEmail" type="text" name="user"
+						placeholder="Email"> <input id="inputPassword"
+						type="password" name="pass" placeholder="Password"> <input
+						id="btnLogin" type="submit" name="login"
+						class="login loginmodal-submit" value="Login">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="display: none;">
+		<div class="modal-dialog">
+			<div class="log-section">
+				<h1>Sign Up For Account</h1>
+				<br>
+				<form>
+					<fieldset>
+						<input id="signupName" type="text" placeholder="Name"> 
+						<input id="signupEmail" type="text" placeholder="Email"> 
+						<input id="signupPassword1"	type="password" placeholder="Enter Password">
+						<input id="signupPassword2" type="password"	placeholder="Confirm Password">
+					</fieldset>
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<a href="#" id="btnSignUp" class="btn btn-lg btn-primary"
+							style="color: white;">Sign Up</a>
+					</div>
+					<h5 class="signUpError" id="signUpError"></h5>
+					<!-- 
+					<input id="btnSignUp" type="submit" name="signin" class="login loginmodal-submit"
+						value="Sign Up">
+						-->
+				</form>
+			</div>
+		</div>
+	</div>

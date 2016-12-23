@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Bulkley Pool Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>See Picks</title>
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -22,18 +24,7 @@
 </script>
 </head>
 <body onload="addScript('js/login.js')">
-	
 	<div id="navBarImport"></div>
 
-	<div class="container">
-		<div class="jumbotron">
-			<h1>Bulkley Family Pool 2017</h1>
-			<p>If you're not first, you're last!</p>
-		</div>
-		<p>Matt is really cool</p>
-		<p>Way better than Corry!</p>
-	</div>
-	<!--container close-->
-	<script src="js/app.js"></script>
 </body>
 </html>

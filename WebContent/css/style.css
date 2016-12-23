@@ -1,6 +1,9 @@
 body {
-	background:
-		url('http://www.wallpaperup.com/uploads/wallpapers/2012/08/04/8547/83fcbd4de6f9646d15bea0759f00e953.jpg');
+	background: url('../img/ball.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 	margin-top: 30px;
 }
 

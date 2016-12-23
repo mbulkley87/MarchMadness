@@ -11,16 +11,18 @@
 	firebase.initializeApp(config);
 	// Get Elements
 	var txtEmail = document.getElementById("inputUsernameEmail");
+	var signupEmail = document.getElementById("signupEmail");
 	var txtPassword = document.getElementById("inputPassword");
 	var btnLogin = document.getElementById("btnLogin");
+	var navLogin = document.getElementById("navLogin");
 	var btnSignUp = document.getElementById("btnSignUp");
+	var navSignUp = document.getElementById("navSignUp");
 	var btnLogout = document.getElementById("btnLogout");
-	var loggedInAs = document.getElementById("loggedInAs");
 	var btnFacebook = document.getElementById("btnFacebook");
 	var btnGoogle = document.getElementById("btnGoogle");
-	var loginStatus = document.getElementById("loginStatus");
-	var socialMediaLogins = document.getElementById("socialMediaLogins");
-	var userBasedLogin = document.getElementById("userBasedLogin");
+	var signUpError = document.getElementById("signUpError");
+	var nameDropDown = document.getElementById("nameDropDown");
+	var displayName = document.getElementById("displayName");
 	
 	// Add Login Event
 	btnLogin.addEventListener('click', e => {
@@ -30,66 +32,88 @@
 		// Sign in
 		var promise = auth.signInWithEmailAndPassword(email,password);
 		promise.catch(e => console.log(e.message));
+		//close Modal window
+		$("#login-modal").modal("hide");
 	});
 	
 	// Add Signup Event
 	btnSignUp.addEventListener('click', e => {
-		var email = txtEmail.value;
-		var password = txtPassword.value;
-		var auth = firebase.auth();
-		// Sign in
-		var promise = auth.createUserWithEmailAndPassword(email,password);
-		promise.catch(e => console.log(e.message));
+		var email = signupEmail.value;
+		var signupPassword1 = document.getElementById("signupPassword1").value;
+		var signupPassword2 = document.getElementById("signupPassword2").value;
+		var signupName = document.getElementById("signupName");
+		if(signupPassword1 == signupPassword2) {
+			var auth = firebase.auth();
+			// Sign in
+			var promise = auth.createUserWithEmailAndPassword(email,signupPassword1)
+				.then(function() {
+					//update Display Name
+					var user = firebase.auth().currentUser;
+					user.updateProfile({
+					  displayName: signupName.value,
+					});
+					if (signupName.value != null) {
+						displayName.innerHTML = signupName.value + "<span class='caret'></span></a>";
+					}
+					else {
+						displayName.innerHTML = user.email;
+					}
+					user.sendEmailVerification();
+				});
+			promise.catch(e => {
+				console.log(e.message);
+				signUpError.innerHTML = e.message;
+			});
+			//close Modal window
+			$("#signup-modal").modal("hide");
+		}
+		//Passwords Don't Match
+		else {
+			signUpError.innerHTML = "Passwords Do Not Match.  Try Again.";
+		}
 	});
 	
 	// Realtime Authentication Listener
 	firebase.auth().onAuthStateChanged(firebaseUser => {
 		if (firebaseUser) {
 			console.log(firebaseUser);
-			if (firebaseUser.displayName == null) {
-				userNameField.innerHTML = firebaseUser.email;
+			if (firebase.auth().currentUser.displayName != null) {
+				displayName.innerHTML = firebase.auth().currentUser.displayName + "<span class='caret'></span></a>";
 			}
 			else {
-				userNameField.innerHTML = firebaseUser.displayName;
+				displayName.innerHTML = firebase.auth().currentUser.email + "<span class='caret'></span></a>";
 			}
-			//When logged in, give options to log out and show user
+			// When logged in, give options to log out and show user
 			btnLogout.classList.remove('hide');
-			loggedInAs.classList.remove('hide');
-			//And hide the login/signup options
-			btnLogin.classList.add('hide');
-			btnSignUp.classList.add('hide');
-			socialMediaLogins.classList.add('hide');
-			userBasedLogin.classList.add('hide');
-			//Change Status
-			loginStatus.innerHTML = "Successful Login";
+			nameDropDown.classList.remove('hide');
+			// And hide the login/signup options
+			navLogin.classList.add('hide');
+			navSignUp.classList.add('hide');
 		}
 		else {
-			//When not logged in, hide logout options
-			console.log("not logged in");
+			console.log("No user logged in.");
+			// When not logged in, hide logout options
 			btnLogout.classList.add('hide');
-			loggedInAs.classList.add('hide');
-			//And give login/signup options
-			btnLogin.classList.remove('hide');
-			btnSignUp.classList.remove('hide');
-			socialMediaLogins.classList.remove('hide');
-			userBasedLogin.classList.remove('hide');
-			//Change status
-			loginStatus.innerHTML = "Please Log In";
+			nameDropDown.classList.add('hide');
+			// And give login/signup options
+			navLogin.classList.remove('hide');
+			navSignUp.classList.remove('hide');
 		}
 	});
 	
-	//Sign Out Button
+	// Sign Out Button
 	btnLogout.addEventListener('click', e => {
 		firebase.auth().signOut();
 	});
 	
-	//Facebook Sign In
+	// Facebook Sign In
 	btnFacebook.addEventListener('click', e => {
 		var provider = new firebase.auth.FacebookAuthProvider();
 		firebase.auth().signInWithRedirect(provider);
 		firebase.auth().getRedirectResult().then(function(result) {
 			  if (result.credential) {
-			    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+			    // This gives you a Facebook Access Token. You can use it to
+				// access the Facebook API.
 			    var token = result.credential.accessToken;
 			    // ...
 			  }
@@ -107,13 +131,14 @@
 			});
 	});
 	
-	//Google Sign In
+	// Google Sign In
 	btnGoogle.addEventListener('click', e => {
 		var provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithRedirect(provider);
 		firebase.auth().getRedirectResult().then(function(result) {
 			  if (result.credential) {
-			    // This gives you a Google Access Token. You can use it to access the Google API.
+			    // This gives you a Google Access Token. You can use it to
+				// access the Google API.
 			    var token = result.credential.accessToken;
 			    // ...
 			  }
